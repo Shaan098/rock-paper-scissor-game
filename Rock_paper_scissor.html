@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #74b9ff, #a29bfe);
+      color: #2d3436;
+      padding-top: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .choices {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 20px 0;
+    }
+
+    .choice img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .choice img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    }
+
+    #result {
+      font-size: 1.3rem;
+      margin-top: 25px;
+      background: white;
+      display: inline-block;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+
+  <div class="choices">
+    <div class="choice">
+      <img src="basics/images/rock.jpeg" 
+           alt="Rock" onclick="playGame('rock')">
+    </div>
+    <div class="choice">
+      <img src="basics/images/paper.jpeg" 
+           alt="Paper" onclick="playGame('paper')">
+    </div>
+    <div class="choice">
+      <img src="basics/images/stone.jpeg" 
+           alt="Scissors" onclick="playGame('scissors')">
+    </div>
+  </div>
+
+  <p id="result">Make your move!</p>
+
+  <script>
+    function playGame(playerMove) {
+      const randomNumber = Math.random();
+      let computerMove = '';
+
+      if (randomNumber < 1/3) {
+        computerMove = 'rock';
+      } else if (randomNumber < 2/3) {
+        computerMove = 'paper';
+      } else {
+        computerMove = 'scissors';
+      }
+
+      let result = '';
+
+      if (playerMove === computerMove) {
+        result = "It's a tie!";
+      } else if (
+        (playerMove === 'rock' && computerMove === 'scissors') ||
+        (playerMove === 'paper' && computerMove === 'rock') ||
+        (playerMove === 'scissors' && computerMove === 'paper')
+      ) {
+        result = "You win!";
+      } else {
+        result = "You lose!";
+      }
+
+      document.getElementById('result').textContent = 
+        `🧍 You chose ${playerMove.toUpperCase()} | 💻 Computer chose ${computerMove.toUpperCase()} → ${result}`;
+    }
+  </script>
+</body>
+</html>
